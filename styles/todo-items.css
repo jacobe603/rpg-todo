@@ -10,6 +10,7 @@
     padding: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative; /* Add this */
 }
 
 .todo-item:hover {
@@ -28,7 +29,10 @@
     color: #0aa;
     padding-left: 20px;
     margin-top: 5px;
+    margin-bottom: 5px; /* Add space before HP bar */
     font-style: italic;
+    display: block;     /* Add this */
+    clear: both;        /* Add this */
 }
 
 .subtask-list {
@@ -41,21 +45,35 @@
 }
 
 .difficulty {
-    float: right;
+    position: absolute;
+    top: 10px;
+    right: 60px;       /* Increase space from right edge */
     color: #0aa;
+    padding: 0 10px;   /* Add padding around text */
 }
 
 .delete-btn {
-    float: right;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     margin-left: 10px;
     cursor: pointer;
+    z-index: 1;
+    padding: 0 5px;    /* Add padding around X */
+}
+
+/* Optional: Add hover effect for delete button */
+.delete-btn:hover {
+    color: #f00;
 }
 
 .hp-bar {
-    margin: 10px 0;
+    margin: 5px 0 10px 0; /* Increase top margin to clear floating elements */
     height: 10px;
     background: rgb(212, 0, 0);
     position: relative;
+    clear: both;          /* Add this */
+    width: calc(100% - 20px); /* Add this to prevent touching edges */
 }
 
 .hp-bar-inner {

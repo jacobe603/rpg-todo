@@ -34,14 +34,33 @@ function handleClick(id) {
 
     if (todo.subtasks.every(sub => sub.completed)) {
         if (todo.remainingHp !== null) {
-            const damage = Math.ceil(todo.remainingHp * 0.2);
-            todo.remainingHp -= damage;
+            // Base damage from settings
+            const baseDamage = window.stats.baseDamage;
+            
+            // Level scaling factor (increases with level)
+            const levelScale = Math.pow(window.stats.xpScaling, window.stats.level - 1);
+            
+            // Random multiplier between 1-2
+            const randomMultiplier = .01 + Math.random();
+            
+            // Calculate total damage
+            let damage = Math.ceil(
+                baseDamage * levelScale * randomMultiplier
+            );
 
-            showNotification(`Strike deals ${damage} damage!`);
+            // Check for critical hit
+            if (isCriticalHit()) {
+                damage *= 2;
+                SoundManager.criticalHitSound();
+                showNotification('CRITICAL HIT!', 5000);
+            }
+
+            todo.remainingHp -= damage;
+            showNotification(`Strike deals ${damage} damage!`, 5000); // Increased to 5 seconds
 
             if (todo.remainingHp <= 0) {
                 completeQuest(todo);
-                showNotification(`${getFinishingBlowDescription()}<br>Quest Completed!`, 5000);
+                showNotification(`${getFinishingBlowDescription()}<br>Quest Completed!`, 8000); // Increased to 8 seconds
             }
         } else {
             completeQuest(todo);
@@ -145,7 +164,7 @@ function checkQuestCompletion(todo) {
 
 function checkPlayerDamage() {
     const uncompletedTasks = window.todos.filter(todo => !todo.completed);
-    if (uncompletedTasks.length === 0) return; // Don't damage if no tasks
+    if (uncompletedTasks.length === 0) return;
     
     uncompletedTasks.forEach(todo => {
         const damagePerTask = {
@@ -155,11 +174,13 @@ function checkPlayerDamage() {
             boss: 5
         };
         
-        // Add base damage to calculated damage
         const totalDamage = window.stats.baseDamage + 
             (damagePerTask[todo.difficulty] * Math.pow(window.stats.xpScaling, window.stats.level - 1));
             
         window.stats.currentHp = Math.max(0, window.stats.currentHp - Math.floor(totalDamage));
+        
+        // Add this line to show damage notification
+        showNotification(`${todo.text} deals ${Math.floor(totalDamage)} damage!`, 5000);
     });
     
     updateStats();
