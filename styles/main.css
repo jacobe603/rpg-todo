@@ -1,0 +1,50 @@
+/* main.css */
+body {
+    background-color: #000;
+    color: #0f0;
+    font-family: monospace;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.container {
+    border: 2px solid #0f0;
+    padding: 20px;
+}
+
+.ascii-border {
+    white-space: pre;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+#todo-input, #subtask-input {
+    background: #000;
+    border: 1px solid #0f0;
+    color: #0f0;
+    padding: 10px;
+    width: 60%;
+    font-family: monospace;
+    margin-right: 10px;
+}
+
+button, select {
+    background: #000;
+    border: 1px solid #0f0;
+    color: #0f0;
+    padding: 10px 20px;
+    font-family: monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover, select:hover {
+    background: #0f0;
+    color: #000;
+}

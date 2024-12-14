@@ -1,0 +1,12 @@
+/* notifications.css */
+#notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #000;
+    border: 2px solid #0f0;
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+    max-width: 250px;
+}

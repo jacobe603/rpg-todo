@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RPG Todo Quest</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/notifications.css">
+    <link rel="stylesheet" href="styles/todo-items.css">
+</head>
+<body>
+    <div class="container">
+        <div class="ascii-border">
++------------------------------------------------------------+
+___________        .___       ____________________  ________ 
+\__    ___/___   __| _/____   \______   \______   \/  _____/ 
+  |    | /  _ \ / __ |/  _ \   |       _/|     ___/   \  ___ 
+  |    |(  <_> ) /_/ (  <_> )  |    |   \|    |   \    \_\  \
+  |____| \____/\____ |\____/   |____|_  /|____|    \______  /
+                    \/                \/                  \/ 
++------------------------------------------------------------+
+        </div>
+
+        <div class="ascii-border">
+            Level: <span id="level">1</span> | XP: <span id="xp">0</span>/<span id="next-level-xp">100</span>
+            Gold: <span id="gold">0</span> | Quests: <span id="completed-count">0</span>/<span id="total-count">0</span>
+            ================================================
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="todo-input" placeholder="Enter your real-world task..." maxlength="100">
+            <select id="difficulty">
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+                <option value="epic">Epic</option>
+                <option value="boss">Boss</option>
+            </select>
+            <button onclick="addTodo()">Add Quest</button>
+            <button onclick="openSettingsModal()">⚙️ Settings</button>
+        </div>
+
+        <ul id="todo-list"></ul>
+    </div>
+
+    <div id="notification"></div>
+
+    <div id="modal">
+        <div class="modal-content">
+            <h2>Game Settings</h2>
+            <div>
+                <label>
+                    <input type="checkbox" id="sound-toggle"> Enable Sound Effects
+                </label>
+            </div>
+            <div>
+                <label>Reset Game Progress</label>
+                <button onclick="resetGameProgress()">Reset All Data</button>
+            </div>
+            <button onclick="closeSettingsModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+<!-- Scripts (update order in index.html) -->
+    <script src="js/constants.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/soundManager.js"></script>
+    <script src="js/gameState.js"></script>
+    <script src="js/questGeneration.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/todoManager.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
