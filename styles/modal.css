@@ -19,3 +19,21 @@
     max-width: 500px;
     width: 100%;
 }
+
+.settings-group {
+    margin: 15px 0;
+}
+
+.settings-group label {
+    display: block;
+    margin: 10px 0;
+}
+
+.settings-group input {
+    background: #000;
+    border: 1px solid #0f0;
+    color: #0f0;
+    padding: 5px;
+    width: 100px;
+    margin-left: 10px;
+}

@@ -1,4 +1,5 @@
 // soundManager.js
+
 const SoundManager = {
     audioContext: null,
     soundEnabled: true,

@@ -65,7 +65,22 @@ function completeQuest(todo) {
     window.stats.xp += totalXp;
     window.stats.gold += totalGold;
 
-    showNotification(`Quest Completed!<br>+${totalXp} XP<br>+${totalGold} Gold`);
+    // Heal player based on difficulty
+    const healAmount = {
+        normal: 10,
+        hard: 20,
+        epic: 30,
+        boss: 50
+    }[todo.difficulty];
+    
+    window.stats.currentHp = Math.min(
+        window.stats.maxHp, 
+        window.stats.currentHp + healAmount
+    );
+    
+    showNotification(
+        `Quest Completed!<br>+${totalXp} XP<br>+${totalGold} Gold<br>+${healAmount} HP`
+    );
 
     if (todo.difficulty === 'boss') {
         SoundManager.bossDefeatSound();
@@ -127,3 +142,29 @@ function checkQuestCompletion(todo) {
         showNotification('All subtasks completed! Click the quest to finish it!');
     }
 }
+
+function checkPlayerDamage() {
+    const uncompletedTasks = window.todos.filter(todo => !todo.completed);
+    if (uncompletedTasks.length === 0) return; // Don't damage if no tasks
+    
+    uncompletedTasks.forEach(todo => {
+        const damagePerTask = {
+            normal: 1,
+            hard: 2,
+            epic: 3,
+            boss: 5
+        };
+        
+        // Add base damage to calculated damage
+        const totalDamage = window.stats.baseDamage + 
+            (damagePerTask[todo.difficulty] * Math.pow(window.stats.xpScaling, window.stats.level - 1));
+            
+        window.stats.currentHp = Math.max(0, window.stats.currentHp - Math.floor(totalDamage));
+    });
+    
+    updateStats();
+    saveGameState();
+}
+
+// Update damage interval
+let damageTimer = setInterval(checkPlayerDamage, window.stats.damageInterval * 1000);

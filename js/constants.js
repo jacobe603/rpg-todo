@@ -3,7 +3,7 @@ const DIFFICULTIES = {
     normal: { xp: 50, gold: 25 },
     hard: { xp: 100, gold: 50 },
     epic: { xp: 200, gold: 100, hp: 100 },
-    boss: { xp: 500, gold: 250, hp: 100 }
+    boss: { xp: 500, gold: 250, hp: 200 }
 };
 
 const QUEST_ELEMENTS = {
@@ -18,45 +18,3 @@ const QUEST_ELEMENTS = {
     bossCreatures: ['Dragon', 'Lich', 'Demon', 'Phoenix', 'Hydra', 'Kraken']
 };
 
-// utils.js
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomElement(array) {
-    return array[Math.floor(Math.random() * array.length)];
-}
-
-function isCriticalHit() {
-    return Math.random() < 0.15; // 15% chance
-}
-
-// gameState.js
-let todos = [];
-let stats = {
-    xp: 0,
-    gold: 0,
-    level: 1
-};
-
-function saveGameState() {
-    localStorage.setItem('todoRpgData', JSON.stringify({
-        todos,
-        stats
-    }));
-}
-
-function loadGameState() {
-    const savedData = localStorage.getItem('todoRpgData');
-    if (savedData) {
-        const { todos: savedTodos, stats: savedStats } = JSON.parse(savedData);
-        todos = savedTodos;
-        stats = savedStats;
-        renderTodos();
-        updateStats();
-    }
-}
-
-function getXpForLevel(level) {
-    return Math.floor(100 * Math.pow(1.5, level - 1));
-}

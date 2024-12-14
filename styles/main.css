@@ -48,3 +48,21 @@ button:hover, select:hover {
     background: #0f0;
     color: #000;
 }
+
+.timer-toggle {
+    float: right;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.timer-toggle input {
+    margin: 0 5px;
+}
+
+.toggle-text {
+    color: #f00;
+}
+
+.toggle-text.active {
+    color: #0f0;
+}

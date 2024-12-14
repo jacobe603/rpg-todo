@@ -3,7 +3,13 @@ window.todos = window.todos || [];
 window.stats = window.stats || {
     xp: 0,
     gold: 0,
-    level: 1
+    level: 1,
+    maxHp: 100,
+    currentHp: 100,
+    baseDamage: 1,      // New base damage
+    xpScaling: 1.5,     // New XP scaling
+    damageInterval: 60,   // Damage interval in seconds
+    timerEnabled: false  // Add this line
 };
 
 function saveGameState() {

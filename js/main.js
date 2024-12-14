@@ -2,11 +2,13 @@
 window.onload = function() {
     loadGameState();
     initializeSoundToggle();
+    initializeSettings();
+    initializeTimerToggle(); // Add this line
     
     // Add click handler to initialize audio
     document.body.addEventListener('click', function() {
         SoundManager.initializeAudioContext();
-    }, { once: true }); // only needs to happen once
+    }, { once: true });
     
     // Event listeners
     document.getElementById('todo-input').addEventListener('keypress', function(e) {
